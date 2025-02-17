@@ -5,6 +5,8 @@ package com.mycompany.echoofshadows;
 
 import com.mycompany.echoofshadows.exceptions.ExceptionMenu;
 import java.util.Scanner;
+
+//Si no está en el mismo paquete hay que importar la clase como: import nombrePaquete.Objeto;
 import objetos.Juego;
 
 /**
@@ -15,7 +17,7 @@ public class EchoOfShadows {
 
     public static void main(String[] args) {
         
-        Juego juego = new Juego();
+        Juego juego = new Juego(); //Crear la variable objeto de esta clase
     }
         /*
         int respuesta;
@@ -26,10 +28,10 @@ public class EchoOfShadows {
             Scanner sc = new Scanner(System.in);
             
             System.out.print("---- Menú inicial ----"
-                    + "\n\t\tNueva partida"
-                    + "\n\t\tContinuar"
-                    + "\n\t\tConfiguración"
-                    + "\n\t\tSalir"
+                    + "\n\t1. Nueva partida"
+                    + "\n\t2. Continuar"
+                    + "\n\t3. Configuración"
+                    + "\n\t4. tSalir"
                     + "\nRespuesta: ");
 
             try {

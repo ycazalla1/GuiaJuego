@@ -4,7 +4,7 @@
  */
 package objetos;
 
-import javax.swing.JFrame;
+import javax.swing.JFrame; //Importar el JFrame
 
 /**
  *
@@ -12,14 +12,19 @@ import javax.swing.JFrame;
  */
 public class VentanaJuego {
     
-    private JFrame jframe;
+    private JFrame jframe; //Crear variable JFrame
     
-    public VentanaJuego() {
+    public VentanaJuego(PanelJuego panelJuego) {
         
-        jframe = new JFrame();
+        jframe = new JFrame(); //Crear objeto JFrame
         
-        jframe.setSize(400, 400);
+        //Resolución ventana
+        jframe.setSize(400, 400); //Asignarle el tamaño a la pestaña
+        //Finalizar el programa cuando se cierre la ventana
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        jframe.add(panelJuego); //Esto es para ensamblar la ventana del juego con el panel (imágen)
+        jframe.setLocationRelativeTo(null); //Hace que aparezca en el centro de la pantalla
         
         /**
          * Se pone debajo para que no de error, porque si se pone encima
