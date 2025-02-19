@@ -18,13 +18,16 @@ public class VentanaJuego {
         
         jframe = new JFrame(); //Crear objeto JFrame
         
-        //Resolución ventana
-        jframe.setSize(400, 400); //Asignarle el tamaño a la pestaña
+        
+        
         //Finalizar el programa cuando se cierre la ventana
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         jframe.add(panelJuego); //Esto es para ensamblar la ventana del juego con el panel (imágen)
         jframe.setLocationRelativeTo(null); //Hace que aparezca en el centro de la pantalla
+        
+        jframe.setResizable(false);
+        jframe.pack();
         
         /**
          * Se pone debajo para que no de error, porque si se pone encima
