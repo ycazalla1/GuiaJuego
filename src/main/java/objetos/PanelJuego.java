@@ -52,7 +52,7 @@ public class PanelJuego extends JPanel{
     
     private void importImg() {
         try {
-            InputStream is = getClass().getResourceAsStream("prueba.jpg");
+            InputStream is = getClass().getResourceAsStream("/img/prueba.jpg");
             if (is == null){
                 throw new IOException("Imagen no encontrada.");
             }
@@ -94,7 +94,7 @@ public class PanelJuego extends JPanel{
      */
         super.paintComponent(g);
         
-        //g.drawImage(null, x, y, null);
+        g.drawImage(img, 0, 0, null);
     }
 
     
