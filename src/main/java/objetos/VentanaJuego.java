@@ -26,7 +26,9 @@ public class VentanaJuego {
         jframe.add(panelJuego); //Esto es para ensamblar la ventana del juego con el panel (imágen)
         jframe.setLocationRelativeTo(null); //Hace que aparezca en el centro de la pantalla
         
+        //Para que no pueda el usuario redimensionar la ventana de juego
         jframe.setResizable(false);
+        //Para que la medida de la venta sea la misma que la del panel
         jframe.pack();
         
         /**

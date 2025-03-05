@@ -11,8 +11,6 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
@@ -30,17 +28,18 @@ public class PanelJuego extends JPanel{
     
     //Se declaran estas variables como floats para controlar la velocidad del movimiento de la imágen
     private float xDelta = 100, yDelta = 100;
-    private BufferedImage img;
+    //Variable para guardar imagenes
+    private BufferedImage img, subImg;
     
     public PanelJuego() {
-        
-        
         
         //Si hacemos una variable de una clase hemos de declaralar en el método
         mouseInputs = new MouseInputs(this);
         
+        //Llama al método para guardar la imagen en una variable
         importImg();
         
+        //Llama al método para redimensionar el panel
         setPanelSize();
         
         //Métodos que guardan los valores al puslsar una teclas o mover el ratón
@@ -50,23 +49,38 @@ public class PanelJuego extends JPanel{
         
     }
     
+    
+    /**
+     * @param is es la variable de tipo InputStream donde se carga la imagen
+     * @param img donde se guarda la imagen
+     */
     private void importImg() {
+        //Un try-catch por si no encuentra la imagen que no se pete el juego
         try {
+            /**
+             * Si esta se encuentra en otro resource package se pone "/" seguido
+             * de la ubicación
+             */
             InputStream is = getClass().getResourceAsStream("/img/prueba.jpg");
             if (is == null){
+                //Excepción que salta si no encuentra la imagen
                 throw new IOException("Imagen no encontrada.");
             }
+            //Si todo ha funcionado bien, guarda la imagen en la variable img
             img = ImageIO.read(is);
         } catch (IOException ex) {
             ex.getStackTrace();
         }
     }
     
+    /**
+     * Método para definir la dimension del panel.
+     * @param dimension instancia de clase dimension, con medidas width i heigth
+     */
     private void setPanelSize() {
         Dimension dimension = new Dimension(1280, 800);
-        setMinimumSize(dimension);
+        //Método para asignar la dimensión creada antes como preferida
         setPreferredSize(dimension);
-        setMaximumSize(dimension);
     }
     
     //Para incrementar las posiciones X e Y
@@ -94,7 +108,26 @@ public class PanelJuego extends JPanel{
      */
         super.paintComponent(g);
         
-        g.drawImage(img, 0, 0, null);
+        /**
+         * Este método es para que se muestre la imagen en una posiciones
+         * El último parámetro es para monitorear el estado de la imagen
+         * antes de que se imprima
+         * g.drawImage(img, 0, 0, null);
+         */
+        
+        /**
+         * getSubimage es para que coja una parte de la imagen
+         * Los dos primeros parámetros son para la posición x, y
+         * Los dos últimos parámetros son para la cantidad de pixeles
+         * que se recojen
+         */
+        subImg = img.getSubimage(14, 17, 46, 75);
+        
+        /**
+         * drawImage, los últimos dos parámetros antes del null, son para
+         * definir el tamaño de la porción de la imagen
+         */
+        g.drawImage(subImg, (int) xDelta, (int) yDelta, 80, 128, null);
     }
 
     
