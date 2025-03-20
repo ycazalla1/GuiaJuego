@@ -52,8 +52,7 @@ public class MouseInputs implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseMoved(MouseEvent e) {
-    //Recoge las variables del ratón, lo que hace que llame al método y le asigne estos valores
-        panelJuego.setRectPos(e.getX(), e.getY());
+        
     }
     
     

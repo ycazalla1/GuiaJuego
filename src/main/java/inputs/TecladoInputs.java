@@ -7,7 +7,7 @@ package inputs;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import objetos.PanelJuego;
-
+import static util.Constantes.Direcciones.*;
 /**
  *
  * @author Yamila Cazalla Recio
@@ -31,7 +31,15 @@ public class TecladoInputs implements KeyListener {
 
      @Override
     public void keyReleased(KeyEvent e) {
-        
+        //Switch para según que tecla pulses haga algo
+        switch(e.getKeyCode()) {
+            case KeyEvent.VK_W:
+            case KeyEvent.VK_A:
+            case KeyEvent.VK_S:
+            case KeyEvent.VK_D:
+                panelJuego.setMovimiento(false);
+                break;
+        }
     }
     
     @Override
@@ -41,16 +49,16 @@ public class TecladoInputs implements KeyListener {
         //Switch para según que tecla pulses haga algo
         switch(e.getKeyCode()) {
             case KeyEvent.VK_W:
-                panelJuego.cambiarY(-5);
+                panelJuego.setDireccion(ARRIBA);
                 break;
             case KeyEvent.VK_A:
-                panelJuego.cambiarX(-5);
+                panelJuego.setDireccion(IZQUIERDA);
                 break;
             case KeyEvent.VK_S:
-                panelJuego.cambiarY(5);
+                panelJuego.setDireccion(ABAJO);
                 break;
             case KeyEvent.VK_D:
-                panelJuego.cambiarX(5);
+                panelJuego.setDireccion(DERECHA);
                 break;
         }
         
