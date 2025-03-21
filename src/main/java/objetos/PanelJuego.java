@@ -30,6 +30,7 @@ public class PanelJuego extends JPanel {
     private float xDelta = 100, yDelta = 100;
     //Variable para guardar imagenes
     private BufferedImage img, subImg;
+    //Matriz de sprites
     private BufferedImage[][] animaciones;
     private int aniTick, aniIndex, aniSpeed = 25;
     
@@ -45,6 +46,7 @@ public class PanelJuego extends JPanel {
         //Llama al método para guardar la imagen en una variable
         importImg();
 
+        //Llama al método para ejecutar la animación
         cargarAnimacion();
 
         //Llama al método para redimensionar el panel
@@ -57,13 +59,22 @@ public class PanelJuego extends JPanel {
 
     }
 
+    /**
+     * Método para ejecutar las animaciones
+     */
     private void cargarAnimacion() {
 
         //Array estática con el número de imagenes para la animación
         animaciones = new BufferedImage[9][6];
 
+        // Dos for para recorrer la matriz
         for (int j = 0; j < animaciones.length; j++) {
             for (int i = 0; i < animaciones[j].length; i++) {
+                /* 
+                    Se guarda el trozo de imagen que contiene cada frame del
+                    sprite
+                    getSubimage(posiciónHorizontal, posiciónVertical, width, heigth);
+                */
                 animaciones[j][i] = img.getSubimage(i * 64, j * 40, 64, 40);
             }
         }
@@ -87,7 +98,7 @@ public class PanelJuego extends JPanel {
         } catch (IOException ex) {
             ex.getStackTrace();
         } finally {
-            //Para controlar otros posibles errores
+            //Para controlar otros posibles errores, el cerrarlo
             try {
                 is.close();
             } catch (IOException e) {
@@ -116,17 +127,31 @@ public class PanelJuego extends JPanel {
         this.movimiento = mov;
     }
 
+    /**
+     * Método para actualizar las animaciones.
+     * Interactua como un bucle
+     */
+    //TODO: entender este método
     private void actualizarAnimacion() {
-        aniTick++;
+        aniTick++; // Incrementa el valor de esta variable
+        /*
+            Si llega a ser más grande que la velocidad vuelve a 0
+            e incrementa el valor de las posiciones del sprite
+        */
         if (aniTick >= aniSpeed) {
             aniTick = 0;
             aniIndex++;
+            /*
+                Si las posisciones del sprite es mayor que la animación
+                la cual empieza siendo 0
+            */
             if (aniIndex >= getAnimacion(accionJudador)) {
                 aniIndex = 0;
             }
         }
     }
 
+    //TODO: entender como funciona este método, el cómo cambia el valor de movimiento
     private void setAnimacion() {
         if (movimiento) {
             accionJudador = CORRER;
@@ -135,6 +160,7 @@ public class PanelJuego extends JPanel {
         }
     }
     
+    //TODO: entender como funciona este método, el cómo cambia el valor de direccionJugador
     private void actualizarPosicion() {
         if (movimiento) {
             switch (direccionJugador) {
@@ -154,7 +180,8 @@ public class PanelJuego extends JPanel {
         }
     }
     
-    //Cuando se crea este método se escribe así tal cual, si no aparece la imágen
+    //Cuando se crea este método se escribe así tal cual, para que aparezca la imagen
+    //TODO: entender qué es lo que llama a ejecutar este método
     public void paintComponent(Graphics g) {
         /**
          * Llama a la super clase "PanelJuego", que se extiende de JPanel Y que
@@ -165,9 +192,9 @@ public class PanelJuego extends JPanel {
         super.paintComponent(g);
 
         /**
-         * Este método es para que se muestre la imagen en una posiciones El
-         * último parámetro es para monitorear el estado de la imagen antes de
-         * que se imprima g.drawImage(img, 0, 0, null);
+         * Este método es para que se muestre la imagen en una posicion
+         * El último parámetro es para monitorear el estado de la imagen antes
+         * de que se imprima g.drawImage(img, 0, 0, null);
          */
         actualizarAnimacion();
         
@@ -185,6 +212,7 @@ public class PanelJuego extends JPanel {
          * drawImage, los últimos dos parámetros antes del null, son para
          * definir el tamaño de la porción de la imagen g.drawImage(subImg,
          * (int) xDelta, (int) yDelta, 80, 128, null);
+         * Ahora en vez del trozo de imagen son las posiciones de la matriz
          */
         g.drawImage(animaciones[accionJudador][aniIndex], (int) xDelta, (int) yDelta, 120, 128, null);
 
