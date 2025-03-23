@@ -16,6 +16,7 @@ public class Juego implements Runnable {
     //Un Thread es una específica tarea de un programa
     private Thread juegoT;
     private final int FPS_JUEGO = 120;
+    private final int UPS_JUEGO = 200;
 
     public Juego() {
 

@@ -162,19 +162,22 @@ public class PanelJuego extends JPanel {
     
     //TODO: entender como funciona este método, el cómo cambia el valor de direccionJugador
     private void actualizarPosicion() {
+        
+        final int VELOCIDAD_MOVIMIENTO = 2;
+        
         if (movimiento) {
             switch (direccionJugador) {
                 case IZQUIERDA:
-                    xDelta -= 2;
+                    xDelta -= VELOCIDAD_MOVIMIENTO;
                     break;
                 case ARRIBA:
-                    yDelta -= 2;
+                    yDelta -= VELOCIDAD_MOVIMIENTO;
                     break;
                 case DERECHA:
-                    xDelta += 2;
+                    xDelta += VELOCIDAD_MOVIMIENTO;
                     break;
                 case ABAJO:
-                    yDelta += 2;
+                    yDelta += VELOCIDAD_MOVIMIENTO;
                     break;
             }
         }
